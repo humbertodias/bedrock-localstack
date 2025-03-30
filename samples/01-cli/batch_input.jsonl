@@ -1,0 +1,3 @@
+{"prompt": "Tell me a quick fact about Vienna.", "max_tokens": 50, "temperature": 0.5}
+{"prompt": "Tell me a quick fact about Zurich.", "max_tokens": 50, "temperature": 0.5}
+{"prompt": "Tell me a quick fact about Las Vegas.", "max_tokens": 50, "temperature": 0.5}

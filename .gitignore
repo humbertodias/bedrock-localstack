@@ -1,0 +1,6 @@
+.env
+localstack
+localstack-data
+.idea
+__pycache__
+.venv

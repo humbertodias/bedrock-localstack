@@ -1,0 +1,8 @@
+
+Hello, this is an automated tool. You can help me by providing the details for your case: *user name*, *address* and *phone number*.
+*user name*: <input type="text" name="user">
+*address*: <input type="text" name="address">
+*phone number*: <input type="tel" name="phone">
+Please fill out the form to submit your details, and we will be in touch soon with more details. Thanks!
+
+I hope this helps! If you have any more questions or need further assistance, feel free to ask!
