@@ -1,4 +1,5 @@
 https://docs.localstack.cloud/user-guide/aws/bedrock/
+https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters-mistral-large-2407.html
 
 ```shell
 # list
@@ -12,6 +13,12 @@ awslocal bedrock-runtime invoke-model \
         "max_gen_len": 2,
         "temperature": 0.9
     }' --cli-binary-format raw-in-base64-out outfile.txt
+
+
+awslocal bedrock-runtime invoke-model \
+    --model-id "meta.llama3-8b-instruct-v1:0" \
+    --body '{"prompt": "Say Hello!", "max_tokens": 10, "temperature": 0.5}' \
+    --cli-binary-format raw-in-base64-out outfile.txt
 
 # chat
 awslocal bedrock-runtime converse \
@@ -29,15 +36,17 @@ awslocal s3 cp batch_input.jsonl s3://01-in-bucket
 awslocal s3 mb s3://01-out-bucket
 
 # invoke model from s3 input
-ACCOUNT_ID=123456789012
+ACCOUNT_ID=000000000000
 awslocal bedrock create-model-invocation-job \
   --job-name "my-batch-job" \
-  --model-id "mistral.mistral-small-2402-v1:0" \
+  --model-id "meta.llama3-8b-instruct-v1:0" \
   --role-arn "arn:aws:iam::$ACCOUNT_ID:role/MyBatchInferenceRole" \
   --input-data-config '{"s3InputDataConfig": {"s3Uri": "s3://01-in-bucket"}}' \
   --output-data-config '{"s3OutputDataConfig": {"s3Uri": "s3://01-out-bucket"}}'
 
+JOB_ID=3c2d977c
+awslocal bedrock get-model-invocation-job --job-identifier $JOB_ID 
+
 # download the output
-JOBNAME=5bad9501
-awslocal s3 cp s3://01-out-bucket/$JOBNAME/batch_input.jsonl.out .
+awslocal s3 cp s3://01-out-bucket/$JOB_ID/batch_input.jsonl.out .
 ```
