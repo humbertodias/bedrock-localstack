@@ -5,6 +5,7 @@ export UID GID
 
 up:
 	docker compose up -d
+	@echo "Access https://app.localstack.cloud"
 	
 down:
 	docker compose down

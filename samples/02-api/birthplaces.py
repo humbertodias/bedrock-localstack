@@ -1,4 +1,7 @@
+import boto3
 import json
+import time
+import pandas as pd # csv
 
 def create_prompts(df):
     # Create an array of prompts to identify each person's place of birth
@@ -36,7 +39,7 @@ def load_data(file_path):
     return df.iloc[[0]]  # only one for testing
 
 def create_prompt_file(df, file_name):
-    prompts = birthplaces.create_prompts(df)
+    prompts = create_prompts(df)
     with open(file_name, 'w') as file:
         for prompt in prompts:
             file.write(f"{prompt}\n")
