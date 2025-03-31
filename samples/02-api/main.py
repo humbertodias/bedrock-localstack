@@ -6,12 +6,13 @@ def main():
     endpoint_url = "http://localhost:4566"
     account_id = "000000000000"
     model_id = "mistral.mistral-small-2402-v1:0"
+    model_id = "ollama.deepseek-r1"
     # modelId="anthropic.claude-3-5-sonnet-20240620-v1:0"
 
     s3_client, bedrock = helper.initialize_clients(profile_name, endpoint_url)
-    df = helper.load_data('famous_people.csv')
+    df = helper.load_data('famous_people.csv', 6)
     print("Loaded DataFrame:")
-    print(df.head(10))
+    print(df)
 
     file_name = helper.create_prompt_file(df, "batch_prompts.jsonl")
     helper.upload_to_s3(s3_client, file_name, "02-in-bucket")

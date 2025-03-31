@@ -1,1 +1,6 @@
-{"recordId": "0", "modelInput": {"anthropic_version": "bedrock-2023-05-31", "max_tokens": 1024, "messages": [{"role": "user", "content": [{"type": "text", "text": "Identify the place of birth for Marilyn Monroe. Format the result like <city/town>,. Do not include any other information."}]}]}}
+{"recordId": "0", "prompt": "Identify the birthplace of the renowned figure Steve Jobs. Please provide a simple a answer in the format: city, country.", "max_tokens": 50, "temperature": 0.5}
+{"recordId": "1", "prompt": "Identify the birthplace of the renowned figure Feryal \u00d6zel. Please provide a simple a answer in the format: city, country.", "max_tokens": 50, "temperature": 0.5}
+{"recordId": "2", "prompt": "Identify the birthplace of the renowned figure Venkatraman Ramakrishnan. Please provide a simple a answer in the format: city, country.", "max_tokens": 50, "temperature": 0.5}
+{"recordId": "3", "prompt": "Identify the birthplace of the renowned figure Shigeru Miyamoto. Please provide a simple a answer in the format: city, country.", "max_tokens": 50, "temperature": 0.5}
+{"recordId": "4", "prompt": "Identify the birthplace of the renowned figure Miguel Nicolelis. Please provide a simple a answer in the format: city, country.", "max_tokens": 50, "temperature": 0.5}
+{"recordId": "5", "prompt": "Identify the birthplace of the renowned figure Rodolfo Llin\u00e1s. Please provide a simple a answer in the format: city, country.", "max_tokens": 50, "temperature": 0.5}

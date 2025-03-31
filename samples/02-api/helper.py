@@ -10,7 +10,7 @@ def create_prompts(df):
         person_name = row['prompt']
         prompt = {
             "recordId": f"{index}",
-            "prompt": f"Tell me a quick fact about {person_name}",
+            "prompt": f"Identify the birthplace of the renowned figure {person_name}. Please provide a simple a answer in the format: city, country.",
             "max_tokens": 50, 
             "temperature": 0.5
         }
@@ -22,8 +22,8 @@ def initialize_clients(profile_name, endpoint_url):
     session = boto3.Session(profile_name=profile_name)
     return session.client('s3', endpoint_url=endpoint_url), session.client('bedrock', endpoint_url=endpoint_url)
 
-def load_data(file_path):
-    return pd.read_csv(file_path)
+def load_data(file_path, nrows=None):
+    return pd.read_csv(file_path, nrows=nrows)
 
 def create_prompt_file(df, file_name):
     prompts = create_prompts(df)
@@ -90,6 +90,8 @@ def process_results(df, output_file):
         for line in file:
             response = json.loads(line)
             output_text = response.get('modelOutput', {})
+            if '</think>' in output_text:
+                output_text = output_text.split('</think>', 1)[1].strip()
             birthplaces_list.append(output_text)
     df['Place of Birth'] = birthplaces_list
     df.to_csv('famous_people_with_birthplaces.csv', index=False)
