@@ -24,15 +24,20 @@ awslocal bedrock-runtime converse \
     }]'
 
 # create input/output buckets
-awslocal s3 mb s3://in-bucket
-awslocal s3 cp batch_input.jsonl s3://in-bucket
-awslocal s3 mb s3://out-bucket
+awslocal s3 mb s3://01-in-bucket
+awslocal s3 cp batch_input.jsonl s3://01-in-bucket
+awslocal s3 mb s3://01-out-bucket
 
 # invoke model from s3 input
+ACCOUNT_ID=123456789012
 awslocal bedrock create-model-invocation-job \
   --job-name "my-batch-job" \
   --model-id "mistral.mistral-small-2402-v1:0" \
-  --role-arn "arn:aws:iam::123456789012:role/MyBatchInferenceRole" \
-  --input-data-config '{"s3InputDataConfig": {"s3Uri": "s3://in-bucket"}}' \
-  --output-data-config '{"s3OutputDataConfig": {"s3Uri": "s3://out-bucket"}}'
+  --role-arn "arn:aws:iam::$ACCOUNT_ID:role/MyBatchInferenceRole" \
+  --input-data-config '{"s3InputDataConfig": {"s3Uri": "s3://01-in-bucket"}}' \
+  --output-data-config '{"s3OutputDataConfig": {"s3Uri": "s3://01-out-bucket"}}'
+
+# download the output
+JOBNAME=5bad9501
+awslocal s3 cp s3://01-out-bucket/$JOBNAME/batch_input.jsonl.out .
 ```
