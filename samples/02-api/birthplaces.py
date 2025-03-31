@@ -9,24 +9,27 @@ def create_prompts(df):
 
     for index, row in df.iterrows():
         person_name = row['prompt']
+        # prompt = {
+        #     "recordId": f"{index}",
+        #     "modelInput": {
+        #         "anthropic_version": "bedrock-2023-05-31",
+        #         "max_tokens": 300,
+        #         "messages": [
+        #             {
+        #                 "role": "user",
+        #                 "content": f"Identify the birthplace of the renowned figure {person_name}."
+        #             }
+        #         ]
+        #     }
+        # }
+
         prompt = {
             "recordId": f"{index}",
-            "modelInput": {
-                "anthropic_version": "bedrock-2023-05-31",
-                "max_tokens": 1024,
-                "messages": [
-                    {
-                        "role": "user",
-                        "content": [
-                            {
-                                "type": "text",
-                                "text": f"Identify the place of birth for {person_name}. Format the result like <city/town>,. Do not include any other information."
-                            }
-                        ]
-                    }
-                ]
-            }
+            "anthropic_version": "bedrock-2023-05-31",
+            "prompt": f"Identify the birthplace (city and country) of the renowned figure {person_name}",
+            "max_tokens_to_sample": 1024
         }
+
         prompts.append(json.dumps(prompt))
     return prompts
 
@@ -36,7 +39,8 @@ def initialize_clients(profile_name, endpoint_url):
 
 def load_data(file_path):
     df = pd.read_csv(file_path)
-    return df.iloc[[0]]  # only one for testing
+    return df
+#    return df.iloc[[10]]  # only one for testing
 
 def create_prompt_file(df, file_name):
     prompts = create_prompts(df)

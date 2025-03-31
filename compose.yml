@@ -1,7 +1,6 @@
 services:
   localstack:
     image: localstack/localstack-pro
-    user: "${UID}:${GID}"
     environment:
       - DOCKER_HOST=unix:///var/run/docker.sock
     env_file:

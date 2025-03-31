@@ -47,7 +47,7 @@ awslocal bedrock-runtime invoke-model \
 --model-id "anthropic.claude-3-5-sonnet-20240620-v1:0" \
 --content-type "application/json" \
 --accept "application/json" \
---body 'Identify the place of birth for Marilyn Monroe. Format the result like city/country' \
+--body '{"prompt": "\n\nIdentify the birthplace (city and country) of the renowned figure Marilyn Monroe in a single word\n\nAssistant:", "max_tokens_to_sample" : 300}' \
 --cli-binary-format raw-in-base64-out outfile.txt
 
 awslocal bedrock-runtime converse \
@@ -55,7 +55,8 @@ awslocal bedrock-runtime converse \
     --messages '[{
         "role": "user",
         "content": [{
-            "text": "Identify the place of birth for Marilyn Monroe. Only return: City/Country"
+            "text": "Identify the birthplace (city and country) of the renowned figure Marilyn Monroe in a single word"
         }]
     }]'
 ```
+

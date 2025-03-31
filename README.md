@@ -12,7 +12,7 @@ docker compose up -d
 ```
 Take the secret on https://app.localstack.cloud/settings/auth-tokens
 
-awscli
+[awscli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 ```shell
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
@@ -29,7 +29,6 @@ json
 EOF
 
 alias awslocal='aws --profile=localstack --endpoint-url=http://localhost:4566'
-
 aws sts get-caller-identity --profile localstack --endpoint-url=http://localhost:4566
 ```
 
@@ -48,5 +47,5 @@ Then access http://localhost:8890/lab
 
 
 ## References
-* [bedrock]()
+* [bedrock](https://docs.localstack.cloud/user-guide/aws/bedrock/)
 * [jupyter](https://jupyter-server.readthedocs.io/en/latest/operators/public-server.html)

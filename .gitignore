@@ -4,3 +4,5 @@ localstack-data
 .idea
 __pycache__
 .venv
+*.pkg
+*.jsonl

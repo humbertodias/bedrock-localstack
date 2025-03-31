@@ -10,5 +10,8 @@ up:
 down:
 	docker compose down
 
+aws-configure:
+	@echo -e "test\ntest\nus-east-2\njson" | aws configure --profile localstack
+
 clean:
 	rm -rf ./localstack ./localstack-data
