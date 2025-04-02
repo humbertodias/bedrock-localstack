@@ -9,20 +9,6 @@ def create_prompts(df):
 
     for index, row in df.iterrows():
         person_name = row['prompt']
-        # prompt = {
-        #     "recordId": f"{index}",
-        #     "modelInput": {
-        #         "anthropic_version": "bedrock-2023-05-31",
-        #         "max_tokens": 300,
-        #         "messages": [
-        #             {
-        #                 "role": "user",
-        #                 "content": f"Identify the birthplace of the renowned figure {person_name}."
-        #             }
-        #         ]
-        #     }
-        # }
-
         prompt = {
             "recordId": f"{index}",
             "anthropic_version": "bedrock-2023-05-31",
@@ -38,9 +24,8 @@ def initialize_clients(profile_name, endpoint_url):
     return session.client('s3', endpoint_url=endpoint_url), session.client('bedrock', endpoint_url=endpoint_url)
 
 def load_data(file_path):
-    df = pd.read_csv(file_path)
-    return df
-#    return df.iloc[[10]]  # only one for testing
+    # only 6 rows for testing
+    return pd.read_csv(file_path).head(6)
 
 def create_prompt_file(df, file_name):
     prompts = create_prompts(df)
