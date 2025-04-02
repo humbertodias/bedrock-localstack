@@ -3,6 +3,7 @@ services:
     image: localstack/localstack-pro
     environment:
       - DOCKER_HOST=unix:///var/run/docker.sock
+      - SERVICES=s3,iam,bedrock,bedrock-runtime,sagemaker,opensearch
     env_file:
       - .env
     ports:
